@@ -1,0 +1,15 @@
+RewriteEngine On
+RewriteBase /PTIT24CNTT01/ss21/
+
+
+
+RewriteEngine On
+RewriteBase /PTIT24CNTT01/ss21/
+
+# ✅ Cho phép truy cập trực tiếp các tài nguyên tĩnh (hình ảnh, JS, CSS, FONT)
+RewriteCond %{REQUEST_URI} \.(jpg|jpeg|png|gif|webp|svg|css|js|woff|woff2|ttf|eot|otf)$ [NC]
+RewriteRule ^ - [L]
+
+# ✅ Cấu hình route MVC về index.php
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]
+
