@@ -23,4 +23,24 @@ class OrderController
         unset($_SESSION['cart']);
         include './App/Views/Order/checkout_success.php';
    }
+   public function history()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        if (!isset($_SESSION['user_id'])) {
+            $config = require './config.php';
+            header("Location: " . $config['baseURL'] . "user/login");
+            exit;
+        }
+
+        $orderModel = new OrderModel();
+        $orders = $orderModel->getOrdersByUserId($_SESSION['user_id']);
+
+        $config = require './config.php';
+        $baseURL = $config['baseURL'];
+
+        include './App/Views/Order/history.php';
+    }
 }
